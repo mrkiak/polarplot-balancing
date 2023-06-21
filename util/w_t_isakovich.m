@@ -1,4 +1,4 @@
-function [weight_necessaty, angle_necessaty] = m_a_isakovich(a1, a2, m1, m2)
+function [weight_necessaty, angle_necessaty] = w_t_isakovich(a1, a2, m1, m2)
     %% Algorithm of Isakovich, Perchanok "Ustranenie vibracii 
     % elektricheskih machine", page 154. Two weights have to 
     % be uninstalled. Target weight is unbalanced weight 

@@ -1,7 +1,6 @@
 function polarweight(T,limit,type)
     %% Depict polar plot of weights in according to mode
-    categories = unique(T.Mode);
-    list = regexprep(string(categories),'[0-9+-/%.]','');
+    modes = unique(T.Mode);
     color = [];
     figure('Name', 'Weight');    
     if type == "ref"
@@ -9,26 +8,32 @@ function polarweight(T,limit,type)
     elseif type == "all"
         D = pullcorrectweight(T,type);
     end   
-    for i=1:length(categories)
-        onemode = T(T.Mode == categories(i), :);
-        color = [color; polarfun(onemode.ComplexWeight, '-', NaN)];
-        addtext(onemode, 'weight');
+    
+    % Plot lines of weight   
+    for i=1:length(modes)
+        mode = T(T.Mode == modes(i), :);
+        color = [color; polarfun(mode.ComplexWeight, '-', NaN)];
+        addtext(mode, 'weight');
         hold on
-
     end
-    for i=1:length(categories)
-        onemode = D(D.Mode == categories(i), :);
-        polarfun(onemode.ComplexCorrectWeight, 'o', color(i,:));
+    
+    % Plot dots of target weight    
+    for i=1:length(modes)
+        mode = D(D.Mode == modes(i), :);
+        polarfun(mode.ComplexCorrectWeight, 'o', color(i,:));
     end
-    for i=1:length(categories)
-        onemode = T(T.Mode == categories(i), :);
-        arrowpolarplot(onemode.ComplexWeight, color(i,:));
-    end 
-   
-    legend(list);
+    
+    % Plot arrows of lines    
+    for i=1:length(modes)
+        mode = T(T.Mode == modes(i), :);
+        arrowpolarplot(mode.ComplexWeight, color(i,:));
+    end
+    legend(modes(modes));
     hold off
+    
+    % Specify limitation of polar plot
     if limit == "speclim"
-        speclimit(T.PhaseWeight)
+        speclimit([T.PhaseWeight; D.CorrectPhase])
     else
         thetalim('auto')
     end

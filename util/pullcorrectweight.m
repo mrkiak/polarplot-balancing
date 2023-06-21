@@ -1,4 +1,9 @@
 function T = pullcorrectweight(T, type)
+    %% 'auto' and 'ref' return target weight in initial table
+    %  'all' return just CorrectWeight
+    if type == "all"
+        T = addreference(T);
+    end
     PullMode = unique(T.Mode);
     for i=1:length(PullMode)
         OneMode = T(T.Mode == PullMode(i), :);
@@ -13,7 +18,7 @@ function T = pullcorrectweight(T, type)
             elseif type == "ref" && T.Mode(j) == PullMode(i) && T.Reference(j) ~= -1
                     ref = T.Reference(j);
                     [T.CorrectWeight(j), T.CorrectPhase(j)] = ...
-                        m_a_isakovich(OneMode.ComplexVibration(ref), ...
+                        w_t_isakovich(OneMode.ComplexVibration(ref), ...
                         T.ComplexVibration(j), ...
                         OneMode.ComplexWeight(ref), ...
                         T.ComplexWeight(j));
