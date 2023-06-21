@@ -32,7 +32,7 @@ function T = polarvibration(varargin)
         mode = T(T.Mode == modes(i), :);
         arrowpolarplot(mode.ComplexVibration, color(i,:));
     end
-    legend(modes(modes));
+    legend(modes);
     hold off
     
     % Specify limitation of polar plot

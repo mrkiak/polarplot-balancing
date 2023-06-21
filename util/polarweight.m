@@ -42,7 +42,7 @@ function polarweight(varargin)
         mode = T(T.Mode == modes(i), :);
         arrowpolarplot(mode.ComplexWeight, color(i,:));
     end
-    legend(modes(modes));
+    legend(modes);
     hold off
     
     % Specify limitation of polar plot
