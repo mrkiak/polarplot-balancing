@@ -1,5 +1,19 @@
-function polarweight(T,limit,type)
-    %% Depict polar plot of weights in according to mode
+function polarweight(varargin)
+% Depict polar plot of weights in according to mode
+% T = polarweight(T, type)
+% T = polarweight(T, limit, type)
+    switch length(varargin)
+        case 2
+            T = varargin{1};
+            type = varargin{2};
+        case 3
+            T = varargin{1};
+            limit = varargin{2};
+            type = varargin{3};
+        otherwise
+            error('Wrong number of input arguments')
+    end
+    
     modes = unique(T.Mode);
     color = [];
     figure('Name', 'Weight');    
@@ -12,7 +26,7 @@ function polarweight(T,limit,type)
     % Plot lines of weight   
     for i=1:length(modes)
         mode = T(T.Mode == modes(i), :);
-        color = [color; polarfun(mode.ComplexWeight, '-', NaN)];
+        color = [color; polarfun(mode.ComplexWeight, '-')];
         addtext(mode, 'weight');
         hold on
     end
@@ -32,9 +46,7 @@ function polarweight(T,limit,type)
     hold off
     
     % Specify limitation of polar plot
-    if limit == "speclim"
+    if exist('limit', 'var')
         speclimit([T.PhaseWeight; D.CorrectPhase])
-    else
-        thetalim('auto')
     end
 end

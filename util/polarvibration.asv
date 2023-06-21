@@ -1,18 +1,28 @@
-function T = polarvibration(varargin)
+function T = polarvibration(T, limit, type)
 % Depict polar plot of vibration in according to mode
+% T = polarvibration(T, type)
 % T = polarvibration(T, type)
 % T = polarvibration(T, limit, type)
     switch length(varargin)
+        case 1
+            complex = varargin{1};
+            p = polarplot(complex);
         case 2
-            T = varargin{1};
-            type = varargin{2};
+            complex = varargin{1};
+            linespec = varargin{2};
+            p = polarplot(complex, linespec, ...
+                'LineWidth', 2);
         case 3
-            T = varargin{1};
-            limit = varargin{2};
-            type = varargin{3};
+            complex = varargin{1};
+            linespec = varargin{2};
+            color = varargin{3};
+            p = polarplot(complex, linespec, ...
+                'LineWidth', 2, ...
+                'Color', color);
         otherwise
-            error('Wrong number of input arguments')
+            error('Too many input arguments')
     end
+    color = p.Color;
 
     modes = unique(T.Mode);
     color = [];
@@ -36,7 +46,9 @@ function T = polarvibration(varargin)
     hold off
     
     % Specify limitation of polar plot
-    if exist('limit', 'var')
+    if limit == "speclim"
         speclimit(T.PhaseAmplitude)
+    else
+        thetalim('auto')
     end
 end
