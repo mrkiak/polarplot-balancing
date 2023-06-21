@@ -1,5 +1,5 @@
 function [rmass, resangle] =  w_t_matcad(z1, z2, fmass)
-    %% Copy-paste of MathCAD code
+    %% Copy-paste of MathCAD code. Do not recommended.
     if fmass < 0 
         d = z2 - z1;
     else
