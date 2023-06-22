@@ -1,5 +1,5 @@
 function data = imdata(csvfile)
-    %% Setup the Import Options and import the data
+    % Setup the Import Options and import the data
     opts = delimitedTextImportOptions("NumVariables", 5);
 
     % Specify range and delimiter

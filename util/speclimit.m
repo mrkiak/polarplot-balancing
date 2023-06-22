@@ -1,5 +1,5 @@
 function speclimit(T)
-    %% Return correct theta limits for polar plot
+% Return correct theta limits for polar plot
     T = T(T ~= 0);
     D = T;
     h = length(D);

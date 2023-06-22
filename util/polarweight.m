@@ -1,4 +1,4 @@
-function polarweight(varargin)
+function D = polarweight(varargin)
 % Depict polar plot of weights in according to mode
 % T = polarweight(T, type)
 % T = polarweight(T, limit, type)
@@ -14,15 +14,10 @@ function polarweight(varargin)
             error('Wrong number of input arguments')
     end
     
+    D = pullcorrectweight(T, type);
     modes = unique(T.Mode);
     color = [];
-    figure('Name', 'Weight');    
-    if type == "ref"
-        D = pullcorrectweight(T,type);
-    elseif type == "all"
-        D = pullcorrectweight(T,type);
-    end   
-    
+    figure('Name', 'Weights');  
     % Plot lines of weight   
     for i=1:length(modes)
         mode = T(T.Mode == modes(i), :);

@@ -1,5 +1,5 @@
 function arrowpolarplot(complex, color)
-    %% Add arrows to polar plot
+% Add arrows to polar plot
      if (length(complex) > 1)
          for i=2:length(complex)
              delta = complex(i-1)-complex(i);

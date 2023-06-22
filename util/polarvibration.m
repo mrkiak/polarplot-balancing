@@ -1,15 +1,13 @@
-function T = polarvibration(varargin)
+function polarvibration(varargin)
 % Depict polar plot of vibration in according to mode
-% T = polarvibration(T, type)
-% T = polarvibration(T, limit, type)
+% polarvibration(T)
+% polarvibration(T, limit)
     switch length(varargin)
+        case 1
+            T = varargin{1};
         case 2
             T = varargin{1};
-            type = varargin{2};
-        case 3
-            T = varargin{1};
             limit = varargin{2};
-            type = varargin{3};
         otherwise
             error('Wrong number of input arguments')
     end
@@ -24,7 +22,6 @@ function T = polarvibration(varargin)
         color = [color; polarfun(mode.ComplexVibration, '-')];
         hold on
         addtext(mode, 'vibration');
-        T = pullcorrectweight(T, type);
     end
     
     % Plot arrows of lines
