@@ -22,7 +22,7 @@ function D = polarweight(varargin)
     for i=1:length(modes)
         mode = T(T.Mode == modes(i), :);
         color = [color; polarfun(mode.ComplexWeight, '-')];
-        addtext(mode, 'weight');
+        textweighttheta(mode, 'weight');
         hold on
     end
     
@@ -30,6 +30,7 @@ function D = polarweight(varargin)
     for i=1:length(modes)
         mode = D(D.Mode == modes(i), :);
         polarfun(mode.ComplexCorrectWeight, 'o', color(i,:));
+        textreference(mode);
     end
     
     % Plot arrows of lines    

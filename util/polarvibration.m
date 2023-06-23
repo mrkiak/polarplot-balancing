@@ -21,7 +21,7 @@ function polarvibration(varargin)
         mode = T(T.Mode == modes(i), :);
         color = [color; polarfun(mode.ComplexVibration, '-')];
         hold on
-        addtext(mode, 'vibration');
+        textweighttheta(mode, 'vibration');
     end
     
     % Plot arrows of lines

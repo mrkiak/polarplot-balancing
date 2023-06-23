@@ -1,4 +1,4 @@
-function addtext(table, type)
+function textweighttheta(table, type)
 % Add text to vector on polar plot
     if type == "vibration"
         theta = table.PhaseAmplitude; rho = table.DoubleAmplitude;
