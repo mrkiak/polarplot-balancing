@@ -5,7 +5,7 @@ function arrowpolarplot(complex, color)
              delta = complex(i-1)-complex(i);
              resultant_length = abs(complex(i));
              resultant_direction = angle(complex(i));
-             arrowhead_length = resultant_length/20; 
+             arrowhead_length = abs(delta)^0.4; 
              num_arrowlines = 30;
              arrowhead_angle = deg2rad(30);
              t1 = repmat(resultant_direction,1,num_arrowlines);
