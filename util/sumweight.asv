@@ -1,7 +1,0 @@
-function sumweight = sumweight(T, i)
-    sumweight = T.ComplexWeight(i);
-    ref = T.Reference(i);
-    while ref ~= -1 || ref ~= 1
-        sumweight = T.Complexweght()
-    end
-end
