@@ -1,5 +1,5 @@
-function [amplitude, theta] = ampthetafromz(z)
-% Amplitude and phase of complex
-    amplitude = abs(z);
+function [magnitude, theta] = ampthetafromz(z)
+%  Magnitude and phase of complex
+    magnitude = abs(z);
     theta = rad2deg(angle(z));
 end

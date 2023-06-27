@@ -4,22 +4,21 @@ function p = polarfun(varargin)
 % color = polarfun(complex, linespec, color)
     switch length(varargin)
         case 1
-            complex = varargin{1};
-            p = polarplot(complex);
+            z = varargin{1};
+            p = polarplot(z);
         case 2
-            complex = varargin{1};
+            z = varargin{1};
             linespec = varargin{2};
-            p = polarplot(complex, linespec, ...
+            p = polarplot(z, linespec, ...
                 'LineWidth', 2);
         case 3
-            complex = varargin{1};
+            z = varargin{1};
             linespec = varargin{2};
             color = varargin{3};
-            p = polarplot(complex, linespec, ...
+            p = polarplot(z, linespec, ...
                 'LineWidth', 2, ...
                 'Color', color);
         otherwise
             error('Too many input arguments')
     end
-%    color = p.Color;
 end

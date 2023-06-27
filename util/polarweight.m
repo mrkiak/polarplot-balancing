@@ -16,19 +16,19 @@ function D = polarweight(varargin)
     end
     
     D = pullcorrectweight(T, type);
-    modes = unique(T.Mode); p = [];   
+    modes = unique(T.mode); p = [];   
     
     % Plot lines of weight per mode      
     figure('Name', 'Weights', 'Position', [50 50 1400 700]);
     for i = 1:length(modes)
         g = colormod(i);
-        mode = T(T.Mode == modes(i), :);
+        mode = T(T.mode == modes(i), :);
         cnt = 0;         
         for j = 1:height(mode)
-            ref = mode.Reference(j);
+            ref = mode.ref(j);
             if ref ~= -1
-                vector = [mode.ComplexWeight(ref); ...
-                    mode.ComplexWeight(j)];
+                vector = [mode.zWeight(ref); ...
+                    mode.zWeight(j)];
                 if cnt == 0 
                     p = [p, polarfun(vector, '-', gcolor(g,:))];
                     cnt = cnt + 1;
@@ -44,9 +44,9 @@ function D = polarweight(varargin)
     
     % Plot dots of target weight    
     for i=1:length(modes)
-        mode = D(D.Mode == modes(i), :);
+        mode = D(D.mode == modes(i), :);
         g = colormod(i);
-        polarfun(mode.ComplexCorrectWeight, 'o', gcolor(g,:));
+        polarfun(mode.zWeightTarget, 'o', gcolor(g,:));
         textreference(mode);
     end
     legend(p, cellstr(modes));
@@ -54,7 +54,7 @@ function D = polarweight(varargin)
     
     % Specify limitation of polar plot
     if exist('limit', 'var')
-        speclimit([T.PhaseWeight; D.CorrectPhase])
+        speclimit([T.tWeight; D.tWeightTarget])
     end
     
     saveas(gcf, 'pictures\weights.png')

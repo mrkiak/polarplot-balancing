@@ -1,7 +1,7 @@
 close all; clear; clc; setpath;
 % Name of cvs-file in data folder
-%path = 'TupolangLower2_after_cutted.csv';
-path ='Test_GeneralCase.csv';
+path = 'TupolangLower2_after_cutted.csv';
+%path ='Test_GeneralCase.csv';
 %path = 'VotkinsUpperHR10.csv';
 T = imdata(path);
 % Plot vibration on the polar plane. 

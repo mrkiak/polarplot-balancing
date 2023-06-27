@@ -13,19 +13,19 @@ function polarvibration(varargin)
             error('Wrong number of input arguments')
     end
 
-    modes = unique(T.Mode); p = [];
+    modes = unique(T.mode); p = [];
     
     % Plot lines of vibration per mode   
     figure('Name', 'Vibration', 'Position', [50 50 1400 700]);     
     for i = 1:length(modes)
         g = colormod(i);
-        mode = T(T.Mode == modes(i), :);
+        mode = T(T.mode == modes(i), :);
         cnt = 0;         
         for j = 1:height(mode)
-            ref = mode.Reference(j);
+            ref = mode.ref(j);
             if ref ~= -1
-                vector = [mode.ComplexVibration(ref); ...
-                    mode.ComplexVibration(j)];
+                vector = [mode.zP2P(ref); ...
+                    mode.zP2P(j)];
                 if cnt == 0 
                     p = [p, polarfun(vector, '-', gcolor(g,:))];
                     cnt = cnt + 1;
@@ -43,7 +43,7 @@ function polarvibration(varargin)
     
     % Specify limitation of polar plot
     if exist('limit', 'var')
-        speclimit(T.PhaseP2P)
+        speclimit(T.tP2P)
     end
     
     saveas(gcf, 'pictures\vibration.png')

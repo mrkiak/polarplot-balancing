@@ -1,4 +1,4 @@
-function complex = getcomplex(amplitude, phase)
+function z = getcomplex(magnitude, theta)
 % Complex double from amplitude and phase
-    complex = amplitude.*exp(1j*deg2rad(phase));
+    z = magnitude.*exp(1j*deg2rad(theta));
 end

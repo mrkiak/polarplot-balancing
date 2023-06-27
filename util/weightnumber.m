@@ -1,17 +1,17 @@
 function T = weightnumber(T)
-    T = T(T.Reference~=-1, :);
-    T = T(~isnan(T.Weight), :);
-    vibration = unique(T.ComplexVibration);
+    T = T(T.ref~=-1, :);
+    T = T(~isnan(T.mWeight), :);
+    vibration = unique(T.zP2P);
     if length(vibration) == height(T)
-        T.Number = (2:height(T)+1)';
+        T.number = (2:height(T)+1)';
     else
-        T.Number = repmat(2, height(T), 1);
+        T.number = repmat(2, height(T), 1);
         cnt = 3;
         for i = 2:height(T)
-            if T.ComplexVibration(i) ~= T.ComplexVibration(i-1) 
-                T.Number(i) = cnt;
+            if T.zP2P(i) ~= T.zP2P(i-1) 
+                T.number(i) = cnt;
             else
-                T.Number(i) = cnt;
+                T.number(i) = cnt;
                 cnt = cnt + 1;
             end      
         end

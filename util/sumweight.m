@@ -1,10 +1,10 @@
 function sum = sumweight(T,n)
     el = T(n,:);
-    sum = el.ComplexWeight;
-    ref = el.Reference;
+    sum = el.zWeight;
+    ref = el.ref;
     while ref ~= -1
         el = T(ref,:);
-        sum = sum + el.ComplexWeight;
-        ref = el.Reference;
+        sum = sum + el.zWeight;
+        ref = el.ref;
     end
 end
