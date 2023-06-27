@@ -2,6 +2,7 @@ function D = polarweight(varargin)
 % Depict polar plot of weights in according to mode
 % T = polarweight(T, type)
 % T = polarweight(T, limit, type)
+    global gcolor;
     switch length(varargin)
         case 2
             T = varargin{1};
@@ -15,34 +16,47 @@ function D = polarweight(varargin)
     end
     
     D = pullcorrectweight(T, type);
-    modes = unique(T.Mode);
-    color = [];
-    figure('Name', 'Weights');  
-    % Plot lines of weight   
-    for i=1:length(modes)
+    modes = unique(T.Mode); p = [];   
+    
+    % Plot lines of weight per mode      
+    figure('Name', 'Weights', 'Position', [50 50 1400 700]);
+    for i = 1:length(modes)
+        g = colormod(i);
         mode = T(T.Mode == modes(i), :);
-        color = [color; polarfun(mode.ComplexWeight, '-')];
+        cnt = 0;         
+        for j = 1:height(mode)
+            ref = mode.Reference(j);
+            if ref ~= -1
+                vector = [mode.ComplexWeight(ref); ...
+                    mode.ComplexWeight(j)];
+                if cnt == 0 
+                    p = [p, polarfun(vector, '-', gcolor(g,:))];
+                    cnt = cnt + 1;
+                else
+                    polarfun(vector, '-', gcolor(g,:));
+                end
+                hold on          
+                arrowpolarplot(vector, gcolor(g,:));
+            end
+        end
         textweighttheta(mode, 'weight');
-        hold on
     end
     
     % Plot dots of target weight    
     for i=1:length(modes)
         mode = D(D.Mode == modes(i), :);
-        polarfun(mode.ComplexCorrectWeight, 'o', color(i,:));
+        g = colormod(i);
+        polarfun(mode.ComplexCorrectWeight, 'o', gcolor(g,:));
         textreference(mode);
     end
-    
-    % Plot arrows of lines    
-    for i=1:length(modes)
-        mode = T(T.Mode == modes(i), :);
-        arrowpolarplot(mode.ComplexWeight, color(i,:));
-    end
-    legend(modes);
+    legend(p, cellstr(modes));
     hold off
     
     % Specify limitation of polar plot
     if exist('limit', 'var')
         speclimit([T.PhaseWeight; D.CorrectPhase])
     end
+    
+    saveas(gcf, 'pictures\weights.png')
+
 end

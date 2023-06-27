@@ -1,9 +1,6 @@
-function textreference(T)
-% Add text to target weight
+function T = weightnumber(T)
     T = T(T.Reference~=-1, :);
-    T = T(~isnan(T.CorrectWeight), :);
-    theta = T.CorrectPhase; 
-    rho = T.CorrectWeight;
+    T = T(~isnan(T.Weight), :);
     vibration = unique(T.ComplexVibration);
     if length(vibration) == height(T)
         T.Number = (2:height(T)+1)';
@@ -19,10 +16,4 @@ function textreference(T)
             end      
         end
     end
-    text(deg2rad(theta), rho, ...
-        [num2str(T.Number-1,'%i'), ...
-        repmat(char(8594), height(T), 1), ...
-        num2str(T.Reference-1,'%i')], ...
-        'HorizontalAlignment', 'center', ...
-        'VerticalAlignment', 'top', 'FontSize', 8);
 end

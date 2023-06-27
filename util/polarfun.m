@@ -1,4 +1,4 @@
-function color = polarfun(varargin)
+function p = polarfun(varargin)
 % color = polarfun(complex)
 % color = polarfun(complex, linespec)
 % color = polarfun(complex, linespec, color)
@@ -21,5 +21,5 @@ function color = polarfun(varargin)
         otherwise
             error('Too many input arguments')
     end
-    color = p.Color;
+%    color = p.Color;
 end

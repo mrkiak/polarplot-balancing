@@ -13,5 +13,5 @@ polarvibration(T, 'limit');
 % 'ref'  — via reference to first run;
 % 'all'  — via reference everything with everything.
 % T = polarweight(T, [OPTION limit], type)
-T = polarweight(T, 'all');
+T = polarweight(T, 'limit', 'all');
 overwritetable(T, 'Results.xls');
