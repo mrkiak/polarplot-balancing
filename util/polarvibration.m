@@ -24,8 +24,7 @@ function polarvibration(varargin)
         for j = 1:height(mode)
             ref = mode.ref(j);
             if ref ~= -1
-                vector = [mode.zP2P(ref); ...
-                    mode.zP2P(j)];
+                vector = [mode.zP2P(ref); mode.zP2P(j)];
                 if cnt == 0 
                     p = [p, polarfun(vector, '-', gcolor(g,:))];
                     cnt = cnt + 1;
