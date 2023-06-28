@@ -10,7 +10,7 @@ function data = imdata(csvfile)
     opts.VariableNames = ["mode", ...
         "mP2P", "tP2P", ...
         "mWeight", "tWeight", ...
-        "ref", "use", "zWeightReal", ...
+        "ref", "use", "zWeightSum", ...
         "zP2P", ...
         "zWeight", ...
         "mSen", "tSen", ...
@@ -30,11 +30,16 @@ function data = imdata(csvfile)
     
     % Import the data
     data = readtable(fullfile(csvfile), opts); 
-    data = movevars(data, 'zWeightReal', 'After', 'tWeight');
+    data = movevars(data, 'zWeightSum', 'After', 'tWeight');
     data = movevars(data, 'zP2P', 'After', 'tP2P');
     data = movevars(data, 'zWeight', 'After', 'tWeight');
     
     % Add complex values of vibration and weight
     data.zP2P = getcomplex(data.mP2P, data.tP2P);
     data.zWeight = getcomplex(data.mWeight, data.tWeight);
+    data = weightsum(data);
+    
+    % Validation data
+    data = validreference(data);
+    data = validusefulness(data);
 end

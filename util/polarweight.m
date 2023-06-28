@@ -27,8 +27,8 @@ function D = polarweight(varargin)
         for j = 1:height(mode)
             ref = mode.ref(j);
             if ref ~= -1
-                vector = [mode.zWeight(ref); ...
-                    mode.zWeight(j)];
+                vector = [mode.zWeightSum(ref); ...
+                    mode.zWeightSum(j)];
                 if cnt == 0 
                     p = [p, polarfun(vector, '-', gcolor(g,:))];
                     cnt = cnt + 1;

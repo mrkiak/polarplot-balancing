@@ -16,8 +16,8 @@ function T = pullcorrectweight(varargin)
             error('Wrong number of input arguments')
     end
     
+    % Add reference to every measurement
     if type == "all" || type == "ref"
-        T = validreference(T);
         if type == "all"
             T = addreference(T);
             type = "ref";
@@ -26,11 +26,11 @@ function T = pullcorrectweight(varargin)
     
     modes = unique(T.mode);
     for i=1:length(modes)
-        onemode = T(T.mode == modes(i), :);
+        mode = T(T.mode == modes(i), :);
         for j = 1:height(T)
             if type == "cad" && T.mode(j) == modes(i) && T.mWeight(j) ~= 0 
                     [T.mWeightTarget(j), T.tWeightTarget(j)] = ...
-                        w_t_mathcad(onemode.zP2P(1), ...
+                        w_t_mathcad(mode.zP2P(1), ...
                         T.zP2P(j), ...
                         T.mWeight(j));
                     T.zWeightTarget(j) = getcomplex(T.mWeightTarget(j), ...
@@ -40,8 +40,8 @@ function T = pullcorrectweight(varargin)
                     [T.mWeightTarget(j), T.tWeightTarget(j), ...
                         T.zWeightTarget(j), ...
                         T.mSen(j), T.tSen(j)] = ...
-                        w_t_isakovich(onemode.zP2P(ref), T.zP2P(j), ...
-                        onemode.zWeight(ref), T.zWeight(j));
+                        w_t_isakovich(mode.zP2P(ref), T.zP2P(j), ...
+                        mode.zWeightSum(ref), T.zWeightSum(j));
             end
         end
     end
