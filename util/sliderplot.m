@@ -1,23 +1,24 @@
 function sliderplot
     mWeigthTarget = .5;                           
     tWeightTarget = 2;                              
-fig = uifigure;
+    f = uifigure('Name', 'Vibration', 'Position', [50 50 1400 700]);
   
-dial = uigauge(fig);
+    %dial = uigauge(f);
   
-% Creating the slider and assigning 
-% its values to the dial/gauge created above
-slid = uislider(fig,'ValueChangedFcn',@(slid,event) changedial(slid,dial));
-  
-% setting limits to 0 to 23
-slid.Limits = [0 23];
+    % Creating the slider and assigning 
+    % its values to the dial/gauge created above
+    mWeight = uislider(f, 'Orientation', 'vertical', 'Value', 0);
+    mWeight.Limits = [0 360];
+
+
+    tWeight = uislider(f, 'ValueChanged', ...
+        @(src, event) changedial(src, dial));
+    % setting limits
+    tWeight.Limits = [0 360];
+    tWeight.Value = 0;
 end
   
 % ValueChangedFcn event handler
-function changedial(slid,dial)
-  
-% changing dialer values to slider 
-% values after each slide
-dial.Value = slid.Value;
-
+function changedial(slid, dial)
+    dial.Value = slid.Value;
 end

@@ -3,4 +3,7 @@ function overwritetable(T, filename)
       delete(filename);
     end
     writetable(T, filename);
+    D = sumsen(T);
+    [filepath, ~, ~] = fileparts(filename);
+    save(fullfile(filepath, 'summary.mat'), 'D');
 end
