@@ -9,5 +9,6 @@ function D = sumsen(T)
         D.mSen(i) = mean(mode.mSen(tf));
         D.tSen(i) = mean(mode.tSen(tf)); 
         D.zP2P(i) = mode.zP2P(mode.mWeight == 0);
+        D.zWeight(i) = mode.zWeight(mode.mWeight == 0);
     end
  end
