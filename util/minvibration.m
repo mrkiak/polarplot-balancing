@@ -10,7 +10,7 @@ function [m, t] = minvibration(D)
     Z = complex(X, Y);
     A = 0;
     for i = 1:height(D)
-        A = A + abs(zP2P(i)-(zWeight(i)-Z).*k(i));
+        A = A + abs(zP2P(i)-(zWeight(i)-Z).*k(i)).^2;
     end
     minimum = min(abs(A), [], "all");
     [row, col] = find(A == minimum, 1);

@@ -4,6 +4,7 @@ function data = imxls(xlsfile)
         fprintf(2, 'Selected file is not excel file. Try to find\n');
         xlsfile = [path, name, '.xls'];
     end    
+    
     % Import the data
     opts = detectImportOptions(fullfile(xlsfile));
     opts.VariableTypes = ["categorical", repelem("double", 6)];
