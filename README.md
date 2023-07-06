@@ -11,5 +11,5 @@ csv-files include coloums:
 | PhaseWeight     | Weight angle                                     |
 | Reference       | The identical mode number is as trial run        |
 
-<br>Main application tab
-<img src="https://github.com/krajoff/polarplot-balancing/tree/master/pictures/main.png.png?raw=true" width="246" height="204">
+<br>Main application tab<br>
+<img src="https://github.com/krajoff/polarplot-balancing/blob/master/pictures/main.png?raw=true">
